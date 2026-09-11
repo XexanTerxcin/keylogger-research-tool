@@ -1,6 +1,6 @@
-# Keylogger Research Lab
+# Keylogger Research Tool
 
-> ⚠️ **Educational & Authorized Security Research Project**
+> ⚠️ **Educational & Authorized Security Research Tool**
 
 A Python-based keylogging research tool developed from scratch to study how keyboard event monitoring, local telemetry collection, asynchronous processing, and HTTP-based communication can be implemented in a controlled security laboratory.
 
@@ -113,7 +113,7 @@ The research version demonstrates how collected telemetry can be transmitted to 
 ## 📂 Project Structure
 
 ```text
-keylogger-research-lab/
+keylogger-research-tool/
 ├── keylogger.py
 ├── README.md
 └── requirements.txt

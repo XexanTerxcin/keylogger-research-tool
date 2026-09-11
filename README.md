@@ -123,7 +123,7 @@ keylogger-research-lab/
 
 ## 🚀 Installation
 
-Clone the repository:
+Clone t he repository:
 
 ```bash
 git clone https://github.com/XexanTerxcin/keylogger-research-tool.git

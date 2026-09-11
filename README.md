@@ -45,12 +45,12 @@ The project explores:
                             │
                             ▼
                  ┌─────────────────────┐
-                 │   Event Listener   │
+                 │   Event Listener    │
                  └──────────┬──────────┘
                             │
                             ▼
                  ┌─────────────────────┐
-                 │   Input Buffer     │
+                 │   Input Buffer      │
                  └──────────┬──────────┘
                             │
                      Queue / Thread

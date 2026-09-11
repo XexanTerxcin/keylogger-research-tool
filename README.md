@@ -114,11 +114,9 @@ The research version demonstrates how collected telemetry can be transmitted to 
 
 ```text
 keylogger-research-lab/
-│
 ├── keylogger.py
 ├── README.md
-├── requirements.txt
-└── LICENSE
+└── requirements.txt
 ```
 
 ---
@@ -128,8 +126,8 @@ keylogger-research-lab/
 Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/keylogger-research-lab.git
-cd keylogger-research-lab
+git clone https://github.com/XexanTerxcin/keylogger-research-tool.git
+cd keylogger-research-tool
 ```
 
 Install the dependencies:
@@ -207,25 +205,9 @@ More importantly, it helped me understand how seemingly small components can be 
 
 ---
 
-## 🔭 Future Improvements
-
-Possible future research directions include:
-
-* Structured JSON telemetry
-* Configurable endpoints
-* Better exception handling
-* Graceful shutdown and buffer flushing
-* Authentication between client and server
-* Encrypted communications
-* Centralized laboratory dashboard
-* Detection and monitoring capabilities
-* Defensive analysis of keylogging behavior
-
----
-
 ## 👨‍💻 Author
 
-**SMY GAMER / Sk Md Yahya**
+**Sk Md Yahya**
 
 Computer Science & Engineering student and technology enthusiast exploring:
 

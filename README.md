@@ -1,127 +1,115 @@
 # Keylogger Research Tool
 
-> ⚠️ **Educational & Authorized Security Research Tool**
+<div align="center">
 
-A Python-based keylogging research tool developed from scratch to study how keyboard event monitoring, local telemetry collection, asynchronous processing, and HTTP-based communication can be implemented in a controlled security laboratory.
+![Python](https://img.shields.io/badge/Python-3.x-3670A0?style=for-the-badge&logo=python&logoColor=white)
+![Security Research](https://img.shields.io/badge/Focus-Security%20Research-FF4D4D?style=for-the-badge)
+![Educational](https://img.shields.io/badge/Use-Educational%20Only-00C853?style=for-the-badge)
 
-The project was created as part of my hands-on exploration of **offensive security, red-team techniques, Python security tooling, and endpoint telemetry**.
+</div>
+
+> ⚠️ Ethical security research project for authorized lab environments only.
+
+A Python-based research utility built to explore how keyboard input monitoring, local event capture, threaded processing, and remote telemetry transport can be implemented in a controlled, academic setting. This project is designed for studying the underlying mechanics of keylogging behavior without promoting unauthorized exploitation.
+
+---
+
+## Overview
+
+This repository demonstrates a practical research implementation of a keylogging workflow, including:
+
+- keyboard event interception
+- event buffering and filtering
+- asynchronous queue processing
+- local log generation
+- basic host metadata collection
+- HTTP payload transmission to a configured endpoint
+
+The purpose is to understand the architecture, trade-offs, and defensive implications of telemetry capture systems in a safe and responsible research context.
 
 ---
 
 ## ⚠️ Disclaimer
 
-This project is intended **strictly for educational purposes, authorized penetration testing, security research, and controlled laboratory environments**.
+This project is intended strictly for:
 
-Do not deploy or use this software on computers, accounts, or networks without explicit authorization from the owner.
+- authorized penetration testing
+- educational exploration
+- security research in isolated lab environments
+- controlled technical study of telemetry collection systems
 
-The author is not responsible for misuse of this project.
-
----
-
-## 🎯 Project Goals
-
-The main objective of this project was to understand the technical building blocks behind keylogging and telemetry collection rather than relying on existing tools.
-
-The project explores:
-
-* Keyboard event monitoring
-* Background processing
-* Thread-safe queues
-* Local telemetry storage
-* System identification
-* HTTP communication
-* Remote telemetry collection
-* Timestamped event logging
-* Basic endpoint data collection
+It must not be deployed on systems, networks, or accounts without explicit permission from the owner. The author accepts no responsibility for misuse, unauthorized monitoring, or illegal activity.
 
 ---
 
-## 🧠 Architecture
+## Core Features
 
-```text
-                 ┌─────────────────────┐
-                 │   Keyboard Events   │
-                 └──────────┬──────────┘
-                            │
-                            ▼
-                 ┌─────────────────────┐
-                 │   Event Listener    │
-                 └──────────┬──────────┘
-                            │
-                            ▼
-                 ┌─────────────────────┐
-                 │   Input Buffer      │
-                 └──────────┬──────────┘
-                            │
-                     Queue / Thread
-                            │
-                ┌───────────┴───────────┐
-                ▼                       ▼
-       ┌─────────────────┐     ┌─────────────────┐
-       │  Local Logging  │     │ HTTP Telemetry  │
-       │   TXT File      │     │    Endpoint     │
-       └─────────────────┘     └─────────────────┘
+### Keyboard Event Capture
+Captures key presses and recognizes both printable characters and special keys like space, enter, backspace, and tab.
+
+### Threaded Processing
+Uses a producer/consumer model so key events are queued and processed in the background instead of blocking the listener thread.
+
+### Local Telemetry Logging
+Stores timestamped activity in a local temporary log file for lab analysis and evidence review.
+
+### System Fingerprinting
+Collects basic machine metadata such as:
+
+- machine identifier
+- hostname
+- username
+- local IP address
+- current timestamp
+
+### Remote Endpoint Simulation
+Demonstrates how collected strings can be sent to an HTTP endpoint using a configurable webhook-style payload.
+
+---
+
+## System Architecture
+
+```mermaid
+flowchart LR
+    A[Keyboard Input] --> B[Listener Loop]
+    B --> C[Input Buffer]
+    C --> D[Thread-safe Queue]
+    D --> E[Background Worker]
+    E --> F[Local Log File]
+    E --> G[HTTP Telemetry Endpoint]
 ```
 
 ---
 
-## 🛠️ Technologies
+## Technology Stack
 
-* **Python 3**
-* `pynput` — keyboard event monitoring
-* `requests` — HTTP communication
-* `threading` — background processing
-* `queue` — thread-safe task handling
-* `socket` — hostname/IP information
-* `uuid` — machine identification
-* `tempfile` — temporary directory handling
-
----
-
-## ✨ Features
-
-### Keyboard Event Monitoring
-
-Captures keyboard events and handles printable and selected special keys.
-
-### Asynchronous Processing
-
-Keyboard events are placed into a thread-safe queue and processed by a background worker.
-
-This prevents network operations from directly blocking the keyboard listener.
-
-### System Identification
-
-The tool can associate collected telemetry with basic system information such as:
-
-* Machine identifier
-* Hostname
-* Username
-* Local IP address
-* Timestamp
-
-### Local Telemetry
-
-Collected data can be written to a timestamped local log file for laboratory analysis.
-
-### HTTP Telemetry
-
-The research version demonstrates how collected telemetry can be transmitted to a configured HTTP endpoint.
+- Python 3
+- `pynput` for keyboard event monitoring
+- `requests` for HTTP submission
+- `threading` for background task execution
+- `queue` for safe inter-thread communication
+- `socket` for host and network metadata
+- `uuid` for machine identification
+- `tempfile` for temporary storage
+- `datetime` for event timestamping
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```text
 keylogger-research-tool/
+├── Code.js
 ├── keylogger.py
 ├── README.md
 └── requirements.txt
 ```
 
+The `Code.js` file is intended for a Google Apps Script endpoint that receives telemetry payloads from the Python research tool.
+
 ---
 
-## 🚀 Installation
+## Installation
 
 Clone the repository:
 
@@ -136,93 +124,97 @@ Install the dependencies:
 pip install -r requirements.txt
 ```
 
-Example `requirements.txt`:
+Example dependency list:
 
 ```text
 pynput
 requests
 ```
 
----
-
-## 🧪 Laboratory Usage
-
-Run the program only inside an environment you own or have explicit authorization to test.
-
-A suitable environment could be:
-
-```text
-Host Machine
-     │
-     ├── Windows Test VM
-     │
-     └── Linux Test VM
-```
-
-For safe experimentation, use **synthetic test input and dummy data** rather than real passwords, credentials, private messages, or other sensitive information.
+> For the remote endpoint, configure your Google Apps Script URL in the `WEB_APP_URL` constant inside `keylogger.py` and connect it to the logic in `Code.js`.
 
 ---
 
-## 🔐 Security Considerations
+## Lab Usage
 
-Keylogging is a highly sensitive capability because keyboard input can contain:
+Run the script only in an environment you own or have explicit written authorization to test.
 
-* Passwords
-* Authentication codes
-* Private messages
-* API keys
-* Personal information
+Recommended practice:
 
-For this reason, this project should never be used to monitor another person's device without explicit authorization.
-
-When publishing or modifying this project:
-
-* Never commit credentials.
-* Never commit captured keyboard logs.
-* Never publish private API endpoints.
-* Never include real authentication tokens.
-* Use an isolated laboratory environment.
-* Use synthetic data whenever possible.
+- use a virtual machine or isolated test system
+- generate synthetic input instead of real user data
+- avoid capturing passwords, tokens, private messages, or credentials
+- use dummy payloads for all experiments
 
 ---
 
-## 📚 What I Learned
+## Why This Matters
 
-This project helped me understand several practical concepts:
+Keylogging is a powerful and sensitive capability because it can expose:
 
-* Event-driven programming
-* Python concurrency
-* Producer/consumer architecture
-* Thread synchronization
-* HTTP POST requests
-* System information gathering
-* Local telemetry collection
-* Remote telemetry architecture
-* Error handling
-* Security implications of endpoint monitoring
+- passwords
+- one-time codes
+- personal messages
+- API keys
+- confidential data
 
-More importantly, it helped me understand how seemingly small components can be combined into a complete security tool.
+This repository is not meant to enable unauthorized surveillance. It is a technical study of how such systems are built, how they behave, and why defensive controls matter.
 
 ---
 
-## 👨‍💻 Author
+## Security Considerations
+
+When working with this project:
+
+- never commit captured keystrokes
+- never publish real endpoints or credentials
+- never store sensitive user data in logs
+- use isolated test infrastructure only
+- keep all research contained to lab-controlled environments
+
+---
+
+## Educational Takeaways
+
+This project explores several practical software engineering and security concepts:
+
+- event-driven programming
+- concurrency and thread safety
+- producer/consumer architecture
+- HTTP communication patterns
+- operating system metadata collection
+- endpoint telemetry design
+- defensive awareness around monitoring tools
+- the ethical boundaries of offensive security research
+
+---
+
+## Responsible Use
+
+Security knowledge is valuable when used to understand, defend, and improve systems.
+
+Use this project to learn, test, and secure — never to violate trust, privacy, or legal boundaries.
+
+---
+
+## Author
 
 **Sk Md Yahya**
 
-Computer Science & Engineering student and technology enthusiast exploring:
+Computer Science & Engineering student with interest in:
 
-* Cybersecurity
-* Red Teaming
-* Linux
-* Python
-* Electronics
-* Networking
-* Gaming Technology
+- cybersecurity
+- red teaming
+- Linux systems
+- Python development
+- networking
+- electronics
+- gaming technology
 
 ---
 
-## ⚖️ Responsible Use
+<div align="center">
 
-Security knowledge is powerful.
+<strong>Built for research. Built with responsibility.</strong>
 
-Use it to **learn, test, secure, and improve systems — not to compromise people.**
+</div>
